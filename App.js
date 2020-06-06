@@ -4,24 +4,26 @@ import { StyleSheet, Text, View, Button } from 'react-native';
 export default function App() {
 
   const [numeros, setNumeros] = useState(['','','','','','']);
-  const [contador, setContador] = useState(0);
 
-  const gerarNumeros = () => {
+  const gerarNumero = () => {
+    return (Math.floor(Math.random()*100))%60+1;
+  };
+
+  const gerarJogo = () => {
     let numeros = [];
-    for(let i = 1; i <= 6; i++) {
-      setContador(i);
-      numeros.push({
-        key: i,
-        value: (Math.floor(Math.random()*100))%60+1
-      });
+    while (numeros.length < 6) {
+      const n = gerarNumero();
+      if (!numeros.includes(n)) {
+        numeros.push(n);
+      }
     }
-    setNumeros(numeros);
+    setNumeros(numeros.sort((a,b) => a-b).map((x, i) => ({key: i, value: x})));
   };
 
   return (
     <View style={styles.container}>
       <View style={styles.btnGerar}>
-        <Button title="Gerar Números" onPress={gerarNumeros} />
+        <Button title="Gerar Números" onPress={gerarJogo} />
       </View>
       <View style={styles.resultado}>
         {numeros.map((n) => (
