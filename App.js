@@ -17,7 +17,7 @@ export default function App() {
         numeros.push(n);
       }
     }
-    setNumeros(numeros.sort((a,b) => a-b).map((x, i) => ({key: i, value: x})));
+    setNumeros(numeros.sort((a,b) => a-b).map((x, i) => ({key: i+1, value: x})));
   };
 
   return (
